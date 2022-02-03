@@ -1,0 +1,25 @@
+﻿<Window x:Class="ToPfx.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ToPfx"
+        mc:Ignorable="d"
+        Title="Convertidor PFX" Height="250" Width="600">
+    <Grid>
+        <TextBox x:Name="txtcertificado" HorizontalAlignment="Left" Margin="94,14,0,0" Text=""  VerticalAlignment="Top" Width="370" IsReadOnly="True"/>
+        <Label Content="Certificado:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" />
+        <Label Content="Archivo KEY:" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top"/>
+        <Label Content="Contraseña:" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtkey" HorizontalAlignment="Left" Margin="94,44,0,0" Text=""  VerticalAlignment="Top" Width="370" IsReadOnly="True"/>
+        <PasswordBox x:Name="txtpassword" PasswordChar="*" Margin="94,74,136,0"  VerticalAlignment="Top" Width="370"/>
+        <Button x:Name="btnGenerar" Content="Generar" HorizontalAlignment="Left" Margin="513,160,0,0" VerticalAlignment="Top" Width="64" Click="btnGenerar_Click"/>
+        <Label Content="Destino:" HorizontalAlignment="Left" Margin="10,101,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtdestino" HorizontalAlignment="Left" Margin="94,105,0,0" Text="" VerticalAlignment="Top" Width="370" IsReadOnly="True"/>
+        <Button x:Name="btncertificado" Content="Buscar" HorizontalAlignment="Left" Margin="473,13,0,0" VerticalAlignment="Top" Click="btncertificado_Click"/>
+        <Button x:Name="btnkey" Content="Buscar" HorizontalAlignment="Left" Margin="473,43,0,0" VerticalAlignment="Top" Click="btnKey_Click"/>
+        <Button x:Name="btnDestino" Content="Buscar" HorizontalAlignment="Left" Margin="473,104,0,0" VerticalAlignment="Top" Click="btnDestino_Click"/>
+        <ListBox x:Name="txtlistresult" Margin="0,147,108,0" Visibility="Hidden"/>
+
+    </Grid>
+</Window>

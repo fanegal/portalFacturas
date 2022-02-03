@@ -1,0 +1,106 @@
+﻿@model portal_scaCFDi.Models.cfdiViewModels.cfdi_ERViewModels
+@{
+    ViewBag.Title = "CFDI´s del cliente " + Model.rfc_cliente + " - " + Model.razonsocial;
+    ViewBag.Encabezado = Model.rfc_cliente + " - " + Model.razonsocial;
+}
+
+
+<style>
+    #link {
+        color: black;
+        text-decoration: none;
+    }
+</style>
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-12">
+        <h2>@ViewBag.Title.</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="@Url.Action("Index", "Home")">Inicio</a>
+            </li>
+            <li>
+                <a href="@Url.Action("List", "Cliente")">Contribuyentes</a>
+            </li>
+            <li>
+                <strong>CFDI </strong>
+            </li>
+        </ol>
+    </div>
+
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12 text-right">
+            @Html.ActionLink("Listado de contribuyentes", "List", "Cliente", null, new { @class = "btn btn-success" })
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5><i class="fa fa-mail-forward"></i> CFDI Emitidos</h5>
+
+                </div>
+                <div class="ibox-content">
+                    <a class="linkm" href="~/cfdi/tipocomprobante?idcliente=@Model.idcliente.ToString()&emitido=1">
+                        <div id="emitidos"></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5><i class="fa fa-mail-reply"></i> CFDI Recibidos</h5>
+
+                </div>
+                <div class="ibox-content">
+                    <a class="linkm" href="~/cfdi/tipocomprobante?idcliente=@Model.idcliente.ToString()&emitido=0">
+                        <div id="recibidos"></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Styles {
+    @Styles.Render("~/plugins/morrisStyles")
+}
+
+@section Scripts {
+    @Scripts.Render("~/plugins/morris")
+
+
+
+    <script type="text/javascript">
+        var modelo;
+        var em;
+        var re;
+        $(document).ready(function () {
+
+			modelo = @Html.Raw(Json.Encode(Model));
+            em = modelo.emitidos;
+            re = modelo.recibidos;
+
+
+            Morris.Donut({
+                element: re.element,
+                data: re.datas,
+                resize: true,
+                colors: re.colors
+            });
+
+            Morris.Donut({
+                element: em.element,
+                data: em.datas,
+                resize: true,
+                colors: em.colors
+            });
+        });
+    </script>
+}

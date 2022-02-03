@@ -1,0 +1,122 @@
+﻿@model portal_scaCFDi.Models.cfdiViewModels.tipocomprobanteViewModels
+@{
+    var tipo = "";
+    if (Model.emitidos)
+    {
+        tipo = " Emitidos";
+    }
+    else
+    {
+        tipo = " Recibidos";
+    }
+    ViewBag.Title = "CFDI´s" + tipo;
+    ViewBag.Encabezado = Model.rfc_cliente + " - " + Model.razonsocial;
+}
+
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-12">
+        <h2>@ViewBag.Title.</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="@Url.Action("Index", "Home")">Inicio</a>
+            </li>
+            <li>
+                <a href="@Url.Action("List", "Cliente")">Contribuyentes</a>
+            </li>
+            <li>
+                <a href="@Url.Action("cfdi_ER", "cfdi", new { @idcliente= Model.idcliente })">CFDI</a>
+            </li>
+            <li class="active">
+                <strong>
+                    @if (Model.emitidos)
+                    {@:  Emitidos
+                    }
+                    else
+                    {@:   Recibidos
+                    }
+
+                </strong>
+            </li>
+        </ol>
+    </div>
+
+</div>
+
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12 text-right">
+            @Html.ActionLink("Regresar", "cfdi_ER", "cfdi", new { idcliente = Model.idcliente }, new { @class = "btn btn-success" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="widget style1 white-bg">
+                <div class="row">
+                    <div class="col-xs-4 ">
+                        <i class="fa fa-line-chart fa-5x"></i>
+                    </div>
+                    <div class="col-xs-8 text-right">
+                        <span> Ingresos </span>
+                        <h2 class="font-bold">@Model.ingresos</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="widget style1 navy-bg">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <i class="fa fa-minus-circle fa-5x"></i>
+                    </div>
+                    <div class="col-xs-8 text-right">
+                        <span> Egresos </span>
+                        <h2 class="font-bold">@Model.egresos</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="widget style1 lazur-bg">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <i class="fa fa-money fa-5x"></i>
+                    </div>
+                    <div class="col-xs-8 text-right">
+                        <span> Pagos </span>
+                        <h2 class="font-bold">@Model.pagos</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="widget style1 yellow-bg">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <i class="fa fa-user-circle fa-5x"></i>
+                    </div>
+                    <div class="col-xs-8 text-right">
+                        <span> Nomina </span>
+                        <h2 class="font-bold">@Model.nominas</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="widget style1 gray-bg">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <i class="fa fa-book fa-5x"></i>
+                    </div>
+                    <div class="col-xs-8 text-right">
+                        <span> Reportes </span>
+                        <h5 class="font-bold">...En construcción...</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

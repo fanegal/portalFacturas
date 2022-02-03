@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6697a061a3d94007a435f8239dc8c1a3" Name="Diagram1">
+        <EntityTypeShape EntityType="dbcore_Model.cliente" Width="1.5" PointX="3.75" PointY="2.875" />
+        <EntityTypeShape EntityType="dbcore_Model.Estatus_CFDi" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="dbcore_Model.peticion" Width="1.5" PointX="6" PointY="2.25" />
+        <AssociationConnector Association="dbcore_Model.fk_cliente_peticion" />
+        <EntityTypeShape EntityType="dbcore_Model.XMLCFDi" Width="1.5" PointX="8.25" PointY="1.25" />
+        <AssociationConnector Association="dbcore_Model.fk_xmlcfdi_peticion_id_peticion" />
+        <EntityTypeShape EntityType="dbcore_Model.sendmail" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="dbcore_Model.logs" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="dbcore_Model.parametros" Width="1.5" PointX="3.375" PointY="7.75" />
+        <EntityTypeShape EntityType="dbcore_Model.XMLCFDi_conceptos" Width="1.5" PointX="10.5" PointY="2.375" />
+        <AssociationConnector Association="dbcore_Model.FK_xmlcfdi_pxmlcfdi_concepto" />
+        <EntityTypeShape EntityType="dbcore_Model.XMLCFDi_conceptos_impuestos" Width="1.5" PointX="12.75" PointY="3.125" />
+        <AssociationConnector Association="dbcore_Model.FK_XMLCFDi_conceptos_IMPUESTOS" />
+        <EntityTypeShape EntityType="dbcore_Model.cfdi_storage" Width="1.5" PointX="5.375" PointY="7.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

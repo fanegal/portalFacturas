@@ -1,0 +1,169 @@
+﻿@model portal_scaCFDi.Models.cfdiViewModels.List_peticionViewModels
+@{
+    ViewBag.Title = "Listado de CFDI´s del cliente " + Model.rfc_cliente + " - " + Model.razonsocial;
+    ViewBag.Encabezado = Model.rfc_cliente + " - " + Model.razonsocial;
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-12">
+        <h2>@ViewBag.Title.</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="@Url.Action("Index", "Home")">Inicio</a>
+            </li>
+            <li>
+                <a href="@Url.Action("List", "Cliente")">Contribuyentes</a>
+            </li>
+            <li>
+                <strong>Peticiones </strong>
+            </li>
+        </ol>
+    </div>
+
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+
+                    <table width="99%">
+                        <tr>
+                            <td>
+
+                                @if (Model.emitidos)
+                                {
+
+                                    <h3>
+                                        CFDI´s Emitidos&nbsp; &nbsp; &nbsp; &nbsp; Fecha de petición: &nbsp;@Model.fechapet&nbsp; &nbsp; &nbsp; &nbsp; Periodo: &nbsp;@Model.periodopet
+                                    </h3>
+                                }
+                                else
+                                {
+                                    <h3>
+                                        CFDI´s Recibidos&nbsp; &nbsp; &nbsp; &nbsp; Fecha de petición: &nbsp;@Model.fechapet&nbsp; &nbsp; &nbsp; &nbsp; Periodo: &nbsp;@Model.periodopet
+                                    </h3>
+                                }
+
+                            </td>
+                            <td style="text-align:right">
+                                @Html.ActionLink("Listado de peticiones", "List", "Peticion", new { idcliente = Model.idcliente }, new { @class = "btn btn-success" })
+                            </td>
+
+                        </tr>
+                    </table>
+
+
+                    <table class="table table-striped table-bordered table-hover dataTables-example">
+                        <thead>
+                            <tr>
+                                @if (Model.emitidos)
+                                {
+                                    <th>RFC Receptor</th>
+                                    <th>Nombre Receptor</th>
+                                }
+                                else
+                                {
+                                    <th>RFC Emisor</th>
+                                    <th>Nombre Emisor</th>
+                                }
+                                <th>CFDI</th>
+                                <th>Fecha Emision</th>
+                                <th>Fecha Timbrado </th>
+                                <th>UUID</th>
+                                <th>Subtotal</th>
+                                <th>Descuento</th>
+                                <th>Impuesto Trasladados</th>
+                                <th>Impuesto Retenidos</th>
+                                <th>Total</th>
+                                <th>Estatus</th>
+                                <th></th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in @Model.detalles)
+                            {
+                                <tr>
+
+                                    @if (Model.emitidos)
+                                    {
+                                        <td>@item.rfc_receptor.Trim()</td>
+                                        <td>@item.razon_receptor.TrimEnd()</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@item.rfc_emisor</td>
+                                        <td>@item.razon_emisor</td>
+                                    }
+                                    <td>@item.tipocomprobante</td>
+                                    <td>@item.emision  </td>
+                                    <td>@item.fecha_timbre</td>
+                                    <td>@item.uuid</td>
+                                    <td>@item.subtotal</td>
+                                    <td>@item.descuento</td>
+                                    <td>@item.totaltraslados</td>
+                                    <td>@item.totalretenidos</td>
+                                    <td>@item.total</td>
+                                    <td>@item.estatus</td>
+                                    <th>
+                                        <a href="@Url.Action("Download_PDF","cfdi", new { idpeticion = item.id})">**&nbsp;<i class="fa fa-file-o"></i></a>
+                                    </th>
+                                </tr>
+
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Styles {
+    @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
+}
+
+@section Scripts {
+    @Scripts.Render("~/plugins/dataTables")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('.dataTables-example').DataTable({
+                pageLength: 10,
+                scrollY: "500px",
+                scrollX: true,
+                scrollCollapse: true,
+                columnDefs: [
+                    { width: 200, targets: 0 }
+                ],
+                fixedColumns: true,
+                dom: '<"html5buttons"B>lTfgitp',
+                language: {
+                    url: '../Scripts/plugins/dataTables/es_es.json'
+                },
+                buttons: [
+                    { extend: 'excel', title: 'ExampleFile' },
+
+                    {
+                        extend: 'print',
+                        customize: function (win) {
+                            $(win.document.body).addClass('white-bg');
+                            $(win.document.body).css('font-size', '10px');
+
+                            $(win.document.body).find('table')
+                                .addClass('compact')
+                                .css('font-size', 'inherit');
+                        }
+                    }
+                ]
+
+            });
+
+
+
+        });</script>
+}

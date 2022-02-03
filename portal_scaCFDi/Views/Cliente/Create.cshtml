@@ -1,0 +1,101 @@
+﻿@model portal_scaCFDi.Models.clienteViewModels.CreateViewModels
+
+@{
+    ViewBag.Title = "Nuevo Contribuyente";
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-md-9 offset-md-9">
+            <div class="ibox ">
+                <div class="ibox-content">
+
+                    @using (Html.BeginForm("Create", "Cliente", FormMethod.Post, new
+                    { enctype = "multipart/form-data", method = "post", id = "target" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal">
+                            <p class="text-right">
+                                @Html.ActionLink("Regresar al listado", "List", null, new { @class = "btn btn-success" })
+                            </p>
+                            <hr />
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            @if (Model.error)
+                            {
+                                <div class="bg-danger p-xs b-r-xl">
+                                    <p>@Model.mensaje</p>
+                                </div>
+                                <br />
+                            }
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.RFC, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.RFC, new { htmlAttributes = new {@id= "RFC", @class = "form-control", @style = "text-transform:uppercase" } })
+                                    @Html.ValidationMessageFor(model => model.RFC, "", new { @class = "label label-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.razonsocial, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.razonsocial, new { htmlAttributes = new {@id= "razonsocial", @class = "form-control", @style = "text-transform:uppercase" } })
+                                    @Html.ValidationMessageFor(model => model.razonsocial, "", new { @class = "label label-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.pfx, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    <input type="file" name="pfx" />
+                                    @Html.ValidationMessageFor(model => model.pfx, "", new { @class = "label label-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.pass, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.pass, new { htmlAttributes = new { @class = "form-control", @type = "password" } })
+                                    @Html.ValidationMessageFor(model => model.pass, "", new { @class = "label label-danger" })
+                                </div>
+                            </div>
+                            <p class="text-right">
+                                <input type="button" value="Crear" class="btn btn-success" onclick="envia()" />
+                            </p>
+
+
+                        </div>
+                    }
+
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+
+    function envia() {
+        $("#RFC").val($("#RFC").val().toUpperCase());
+        $("#razonsocial").val($("#razonsocial").val().toUpperCase());
+        $("#target").submit();
+
+    }
+
+</script>
+

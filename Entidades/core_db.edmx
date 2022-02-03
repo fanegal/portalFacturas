@@ -1,0 +1,741 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="dbcore_Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="cfdi_storage">
+          <Key>
+            <PropertyRef Name="uuid" />
+          </Key>
+          <Property Name="uuid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="xmltxt" Type="varchar(max)" Nullable="false" />
+          <Property Name="pdf" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="cliente">
+          <Key>
+            <PropertyRef Name="id_cliente" />
+          </Key>
+          <Property Name="id_cliente" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RFC" Type="varchar" MaxLength="15" />
+          <Property Name="razonsocial" Type="varchar" MaxLength="250" />
+          <Property Name="pfx" Type="varbinary(max)" />
+          <Property Name="pass" Type="varchar" MaxLength="500" />
+          <Property Name="fec_alta" Type="datetime" />
+          <Property Name="baja" Type="datetime" />
+          <Property Name="Id" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="bit_descargasAut" Type="bit" Nullable="false" />
+          <Property Name="fec_vigencia" Type="date" />
+        </EntityType>
+        <EntityType Name="Estatus_CFDi">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="uuidtimbre" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="impresion" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="bit_consultado" Type="bit" Nullable="false" />
+          <Property Name="fec_alta" Type="datetime" Nullable="false" />
+          <Property Name="fec_consultado" Type="datetime" />
+        </EntityType>
+        <EntityType Name="logs">
+          <Key>
+            <PropertyRef Name="id_logs" />
+          </Key>
+          <Property Name="id_logs" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="id_user" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="maquina" Type="varchar" MaxLength="20" />
+          <Property Name="fec_create" Type="datetime" />
+          <Property Name="descripcion" Type="text" />
+          <Property Name="bit_error" Type="bit" />
+        </EntityType>
+        <EntityType Name="parametros">
+          <Key>
+            <PropertyRef Name="id_parametros" />
+          </Key>
+          <Property Name="id_parametros" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="valor" Type="varchar" MaxLength="1000" Nullable="false" />
+        </EntityType>
+        <EntityType Name="peticion">
+          <Key>
+            <PropertyRef Name="id_peticion" />
+          </Key>
+          <Property Name="id_peticion" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="id_cliente" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="fec_create" Type="datetime" Nullable="false" />
+          <Property Name="fec_inicio" Type="datetime" Nullable="false" />
+          <Property Name="fec_fin" Type="datetime" Nullable="false" />
+          <Property Name="bit_emitido" Type="bit" Nullable="false" />
+          <Property Name="token" Type="varchar(max)" />
+          <Property Name="idsolicitud" Type="varchar" MaxLength="50" />
+          <Property Name="idpaquete" Type="varchar" MaxLength="50" />
+          <Property Name="numxml" Type="int" />
+          <Property Name="descargaresponse" Type="varchar(max)" />
+          <Property Name="bit_terminado" Type="bit" Nullable="false" />
+          <Property Name="bit_error" Type="bit" Nullable="false" />
+          <Property Name="bit_automatico" Type="bit" Nullable="false" />
+          <Property Name="bit_descargado" Type="bit" Nullable="false" />
+          <Property Name="intentos" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sendmail">
+          <Key>
+            <PropertyRef Name="id_sendmail" />
+          </Key>
+          <Property Name="id_sendmail" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="origen" Type="varchar" MaxLength="250" />
+          <Property Name="destino" Type="varchar" MaxLength="250" />
+          <Property Name="asunto" Type="varchar" MaxLength="500" />
+          <Property Name="cc" Type="varchar" MaxLength="1000" />
+          <Property Name="cco" Type="varchar" MaxLength="1000" />
+          <Property Name="cuerpo" Type="text" />
+          <Property Name="host" Type="varchar" MaxLength="100" />
+          <Property Name="puerto" Type="varchar" MaxLength="10" />
+          <Property Name="bit_ssl" Type="bit" Nullable="false" />
+          <Property Name="bit_enviado" Type="bit" Nullable="false" />
+          <Property Name="bit_error" Type="bit" Nullable="false" />
+          <Property Name="fec_creacion" Type="datetime" Nullable="false" />
+          <Property Name="fec_envio" Type="datetime" />
+        </EntityType>
+        <EntityType Name="XMLCFDi">
+          <Key>
+            <PropertyRef Name="id_xmlcfdi" />
+          </Key>
+          <Property Name="id_xmlcfdi" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="id_peticion" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="version" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="fecha" Type="datetime" Nullable="false" />
+          <Property Name="formapago" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="moneda" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="tipocambio" Type="decimal" Precision="6" Scale="4" Nullable="false" />
+          <Property Name="tipocomprobante" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="metodopago" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="lugarexpedicion" Type="int" Nullable="false" />
+          <Property Name="regimenfiscal" Type="varchar" MaxLength="500" />
+          <Property Name="nombreemisor" Type="varchar" MaxLength="1000" />
+          <Property Name="rfcemisior" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="nombrereceptor" Type="varchar" MaxLength="1000" />
+          <Property Name="rfcreceptor" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="usocfdi" Type="varchar" MaxLength="500" />
+          <Property Name="subtotal" Type="decimal" Precision="12" Scale="4" Nullable="false" />
+          <Property Name="descuento" Type="decimal" Precision="12" Scale="4" Nullable="false" />
+          <Property Name="totaltraslados" Type="decimal" Precision="12" Scale="4" Nullable="false" />
+          <Property Name="totalretenidos" Type="decimal" Precision="12" Scale="4" Nullable="false" />
+          <Property Name="total" Type="decimal" Precision="12" Scale="4" Nullable="false" />
+          <Property Name="fechatimbre" Type="datetime" Nullable="false" />
+          <Property Name="uuidtimbre" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="bit_vigente" Type="bit" Nullable="false" />
+          <Property Name="estatusCancelacion" Type="varchar" MaxLength="25" />
+          <Property Name="ruta" Type="varchar" MaxLength="300" Nullable="false" />
+        </EntityType>
+        <EntityType Name="XMLCFDi_conceptos">
+          <Key>
+            <PropertyRef Name="id_concepto" />
+          </Key>
+          <Property Name="id_concepto" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="id_xmlcfdi" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ClaveProdServ" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="NoIdentificacion" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Cantidad" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="ClaveUnidad" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Unidad" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="ValorUnitario" Type="decimal" Precision="24" Scale="6" Nullable="false" />
+          <Property Name="Importe" Type="decimal" Precision="24" Scale="6" Nullable="false" />
+          <Property Name="Descuento" Type="decimal" Precision="24" Scale="6" Nullable="false" />
+          <Property Name="InformacionAduanera" Type="text" Nullable="false" />
+          <Property Name="CuentaPredial" Type="text" Nullable="false" />
+          <Property Name="ComplementoConcepto" Type="text" Nullable="false" />
+          <Property Name="Parte" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="XMLCFDi_conceptos_impuestos">
+          <Key>
+            <PropertyRef Name="id_concepto_impuesto" />
+          </Key>
+          <Property Name="id_concepto_impuesto" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="id_concepto" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Base" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Impuesto" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="TipoFactor" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="TasaOCuota" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Importe" Type="decimal" Precision="24" Scale="6" Nullable="false" />
+          <Property Name="bit_traslado" Type="bit" />
+        </EntityType>
+        <Association Name="fk_cliente_peticion">
+          <End Role="cliente" Type="Self.cliente" Multiplicity="1" />
+          <End Role="peticion" Type="Self.peticion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cliente">
+              <PropertyRef Name="id_cliente" />
+            </Principal>
+            <Dependent Role="peticion">
+              <PropertyRef Name="id_cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_XMLCFDi_conceptos_IMPUESTOS">
+          <End Role="XMLCFDi_conceptos" Type="Self.XMLCFDi_conceptos" Multiplicity="1" />
+          <End Role="XMLCFDi_conceptos_impuestos" Type="Self.XMLCFDi_conceptos_impuestos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="XMLCFDi_conceptos">
+              <PropertyRef Name="id_concepto" />
+            </Principal>
+            <Dependent Role="XMLCFDi_conceptos_impuestos">
+              <PropertyRef Name="id_concepto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_xmlcfdi_peticion_id_peticion">
+          <End Role="peticion" Type="Self.peticion" Multiplicity="1" />
+          <End Role="XMLCFDi" Type="Self.XMLCFDi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="peticion">
+              <PropertyRef Name="id_peticion" />
+            </Principal>
+            <Dependent Role="XMLCFDi">
+              <PropertyRef Name="id_peticion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_xmlcfdi_pxmlcfdi_concepto">
+          <End Role="XMLCFDi" Type="Self.XMLCFDi" Multiplicity="1" />
+          <End Role="XMLCFDi_conceptos" Type="Self.XMLCFDi_conceptos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="XMLCFDi">
+              <PropertyRef Name="id_xmlcfdi" />
+            </Principal>
+            <Dependent Role="XMLCFDi_conceptos">
+              <PropertyRef Name="id_xmlcfdi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="GETPASSHASUSER" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="nvarchar(max)">
+          <Parameter Name="MAIL" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_cfdiER" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idcliente" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="emitidos" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="sp_peticiondescarga" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="mail" Type="varchar(max)" Mode="In" />
+          <Parameter Name="rfc" Type="varchar(max)" Mode="In" />
+        </Function>
+        <EntityContainer Name="dbcore_ModelStoreContainer">
+          <EntitySet Name="cfdi_storage" EntityType="Self.cfdi_storage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cliente" EntityType="Self.cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Estatus_CFDi" EntityType="Self.Estatus_CFDi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="logs" EntityType="Self.logs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="parametros" EntityType="Self.parametros" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="peticion" EntityType="Self.peticion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sendmail" EntityType="Self.sendmail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="XMLCFDi" EntityType="Self.XMLCFDi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="XMLCFDi_conceptos" EntityType="Self.XMLCFDi_conceptos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="XMLCFDi_conceptos_impuestos" EntityType="Self.XMLCFDi_conceptos_impuestos" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_cliente_peticion" Association="Self.fk_cliente_peticion">
+            <End Role="cliente" EntitySet="cliente" />
+            <End Role="peticion" EntitySet="peticion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_XMLCFDi_conceptos_IMPUESTOS" Association="Self.FK_XMLCFDi_conceptos_IMPUESTOS">
+            <End Role="XMLCFDi_conceptos" EntitySet="XMLCFDi_conceptos" />
+            <End Role="XMLCFDi_conceptos_impuestos" EntitySet="XMLCFDi_conceptos_impuestos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_xmlcfdi_peticion_id_peticion" Association="Self.fk_xmlcfdi_peticion_id_peticion">
+            <End Role="peticion" EntitySet="peticion" />
+            <End Role="XMLCFDi" EntitySet="XMLCFDi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_xmlcfdi_pxmlcfdi_concepto" Association="Self.FK_xmlcfdi_pxmlcfdi_concepto">
+            <End Role="XMLCFDi" EntitySet="XMLCFDi" />
+            <End Role="XMLCFDi_conceptos" EntitySet="XMLCFDi_conceptos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbcore_Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Entities_dbcore" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="cliente" EntityType="dbcore_Model.cliente" />
+          <EntitySet Name="Estatus_CFDi" EntityType="dbcore_Model.Estatus_CFDi" />
+          <EntitySet Name="peticion" EntityType="dbcore_Model.peticion" />
+          <AssociationSet Name="fk_cliente_peticion" Association="dbcore_Model.fk_cliente_peticion">
+            <End Role="cliente" EntitySet="cliente" />
+            <End Role="peticion" EntitySet="peticion" />
+          </AssociationSet>
+          <EntitySet Name="XMLCFDi" EntityType="dbcore_Model.XMLCFDi" />
+          <AssociationSet Name="fk_xmlcfdi_peticion_id_peticion" Association="dbcore_Model.fk_xmlcfdi_peticion_id_peticion">
+            <End Role="peticion" EntitySet="peticion" />
+            <End Role="XMLCFDi" EntitySet="XMLCFDi" />
+          </AssociationSet>
+          <EntitySet Name="sendmail" EntityType="dbcore_Model.sendmail" />
+          <EntitySet Name="logs" EntityType="dbcore_Model.logs" />
+          <EntitySet Name="parametros" EntityType="dbcore_Model.parametros" />
+          <FunctionImport Name="sp_peticiondescarga" ReturnType="Collection(dbcore_Model.sp_peticiondescarga_Result)">
+            <Parameter Name="mail" Mode="In" Type="String" />
+            <Parameter Name="rfc" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="XMLCFDi_conceptos" EntityType="dbcore_Model.XMLCFDi_conceptos" />
+          <AssociationSet Name="FK_xmlcfdi_pxmlcfdi_concepto" Association="dbcore_Model.FK_xmlcfdi_pxmlcfdi_concepto">
+            <End Role="XMLCFDi" EntitySet="XMLCFDi" />
+            <End Role="XMLCFDi_conceptos" EntitySet="XMLCFDi_conceptos" />
+          </AssociationSet>
+          <EntitySet Name="XMLCFDi_conceptos_impuestos" EntityType="dbcore_Model.XMLCFDi_conceptos_impuestos" />
+          <AssociationSet Name="FK_XMLCFDi_conceptos_IMPUESTOS" Association="dbcore_Model.FK_XMLCFDi_conceptos_IMPUESTOS">
+            <End Role="XMLCFDi_conceptos" EntitySet="XMLCFDi_conceptos" />
+            <End Role="XMLCFDi_conceptos_impuestos" EntitySet="XMLCFDi_conceptos_impuestos" />
+          </AssociationSet>
+          <EntitySet Name="cfdi_storage" EntityType="dbcore_Model.cfdi_storage" />
+          <FunctionImport Name="sp_cfdiER" ReturnType="Collection(dbcore_Model.sp_cfdiER_Result)">
+            <Parameter Name="idcliente" Mode="In" Type="Guid" />
+            <Parameter Name="emitidos" Mode="In" Type="Boolean" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="cliente">
+          <Key>
+            <PropertyRef Name="id_cliente" />
+          </Key>
+          <Property Name="id_cliente" Type="Guid" Nullable="false" />
+          <Property Name="RFC" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="razonsocial" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="pfx" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="pass" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="fec_alta" Type="DateTime" Precision="3" />
+          <Property Name="baja" Type="DateTime" Precision="3" />
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="peticion" Relationship="dbcore_Model.fk_cliente_peticion" FromRole="cliente" ToRole="peticion" />
+          <Property Name="bit_descargasAut" Type="Boolean" Nullable="false" />
+          <Property Name="fec_vigencia" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="Estatus_CFDi">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="uuidtimbre" Type="Guid" Nullable="false" />
+          <Property Name="impresion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="bit_consultado" Type="Boolean" Nullable="false" />
+          <Property Name="fec_alta" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="fec_consultado" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="peticion">
+          <Key>
+            <PropertyRef Name="id_peticion" />
+          </Key>
+          <Property Name="id_peticion" Type="Guid" Nullable="false" />
+          <Property Name="id_cliente" Type="Guid" Nullable="false" />
+          <Property Name="fec_create" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="fec_inicio" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="fec_fin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="bit_emitido" Type="Boolean" Nullable="false" />
+          <Property Name="token" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="idsolicitud" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="idpaquete" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="numxml" Type="Int32" />
+          <Property Name="descargaresponse" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="bit_terminado" Type="Boolean" Nullable="false" />
+          <Property Name="bit_error" Type="Boolean" Nullable="false" />
+          <Property Name="bit_automatico" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="cliente" Relationship="dbcore_Model.fk_cliente_peticion" FromRole="peticion" ToRole="cliente" />
+          <NavigationProperty Name="XMLCFDi" Relationship="dbcore_Model.fk_xmlcfdi_peticion_id_peticion" FromRole="peticion" ToRole="XMLCFDi" />
+          <Property Name="bit_descargado" Type="Boolean" Nullable="false" />
+          <Property Name="intentos" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_cliente_peticion">
+          <End Type="dbcore_Model.cliente" Role="cliente" Multiplicity="1" />
+          <End Type="dbcore_Model.peticion" Role="peticion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cliente">
+              <PropertyRef Name="id_cliente" />
+            </Principal>
+            <Dependent Role="peticion">
+              <PropertyRef Name="id_cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="XMLCFDi">
+          <Key>
+            <PropertyRef Name="id_xmlcfdi" />
+          </Key>
+          <Property Name="id_xmlcfdi" Type="Guid" Nullable="false" />
+          <Property Name="id_peticion" Type="Guid" Nullable="false" />
+          <Property Name="version" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="formapago" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="moneda" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="tipocambio" Type="Decimal" Nullable="false" Precision="6" Scale="4" />
+          <Property Name="tipocomprobante" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="metodopago" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="lugarexpedicion" Type="Int32" Nullable="false" />
+          <Property Name="regimenfiscal" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="nombreemisor" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="rfcemisior" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="nombrereceptor" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="rfcreceptor" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="usocfdi" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="subtotal" Type="Decimal" Nullable="false" Precision="12" Scale="4" />
+          <Property Name="descuento" Type="Decimal" Nullable="false" Precision="12" Scale="4" />
+          <Property Name="totaltraslados" Type="Decimal" Nullable="false" Precision="12" Scale="4" />
+          <Property Name="totalretenidos" Type="Decimal" Nullable="false" Precision="12" Scale="4" />
+          <Property Name="total" Type="Decimal" Nullable="false" Precision="12" Scale="4" />
+          <Property Name="fechatimbre" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="uuidtimbre" Type="Guid" Nullable="false" />
+          <Property Name="bit_vigente" Type="Boolean" Nullable="false" />
+          <Property Name="estatusCancelacion" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="ruta" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="peticion" Relationship="dbcore_Model.fk_xmlcfdi_peticion_id_peticion" FromRole="XMLCFDi" ToRole="peticion" />
+          <NavigationProperty Name="XMLCFDi_conceptos" Relationship="dbcore_Model.FK_xmlcfdi_pxmlcfdi_concepto" FromRole="XMLCFDi" ToRole="XMLCFDi_conceptos" />
+        </EntityType>
+        <Association Name="fk_xmlcfdi_peticion_id_peticion">
+          <End Type="dbcore_Model.peticion" Role="peticion" Multiplicity="1" />
+          <End Type="dbcore_Model.XMLCFDi" Role="XMLCFDi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="peticion">
+              <PropertyRef Name="id_peticion" />
+            </Principal>
+            <Dependent Role="XMLCFDi">
+              <PropertyRef Name="id_peticion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="sendmail">
+          <Key>
+            <PropertyRef Name="id_sendmail" />
+          </Key>
+          <Property Name="id_sendmail" Type="Guid" Nullable="false" />
+          <Property Name="origen" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="destino" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="asunto" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="cc" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="cco" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="cuerpo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="host" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="puerto" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="bit_ssl" Type="Boolean" Nullable="false" />
+          <Property Name="bit_enviado" Type="Boolean" Nullable="false" />
+          <Property Name="bit_error" Type="Boolean" Nullable="false" />
+          <Property Name="fec_creacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="fec_envio" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="logs">
+          <Key>
+            <PropertyRef Name="id_logs" />
+          </Key>
+          <Property Name="id_logs" Type="Guid" Nullable="false" />
+          <Property Name="id_user" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="maquina" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="fec_create" Type="DateTime" Precision="3" />
+          <Property Name="descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="bit_error" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="parametros">
+          <Key>
+            <PropertyRef Name="id_parametros" />
+          </Key>
+          <Property Name="id_parametros" Type="Guid" Nullable="false" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="valor" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <ComplexType Name="sp_peticiondescarga_Result">
+          <Property Type="Guid" Name="id_peticion" Nullable="false" />
+          <Property Type="DateTime" Name="fec_create" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="fec_inicio" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="fec_fin" Nullable="false" Precision="23" />
+          <Property Type="Boolean" Name="bit_emitido" Nullable="false" />
+          <Property Type="Int32" Name="numxml" Nullable="true" />
+          <Property Type="String" Name="descargaresponse" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="XMLCFDi_conceptos">
+          <Key>
+            <PropertyRef Name="id_concepto" />
+          </Key>
+          <Property Name="id_concepto" Type="Guid" Nullable="false" />
+          <Property Name="id_xmlcfdi" Type="Guid" Nullable="false" />
+          <Property Name="ClaveProdServ" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="NoIdentificacion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Cantidad" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="ClaveUnidad" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Unidad" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="ValorUnitario" Type="Decimal" Nullable="false" Precision="24" Scale="6" />
+          <Property Name="Importe" Type="Decimal" Nullable="false" Precision="24" Scale="6" />
+          <Property Name="Descuento" Type="Decimal" Nullable="false" Precision="24" Scale="6" />
+          <Property Name="InformacionAduanera" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CuentaPredial" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ComplementoConcepto" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Parte" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="XMLCFDi" Relationship="dbcore_Model.FK_xmlcfdi_pxmlcfdi_concepto" FromRole="XMLCFDi_conceptos" ToRole="XMLCFDi" />
+          <NavigationProperty Name="XMLCFDi_conceptos_impuestos" Relationship="dbcore_Model.FK_XMLCFDi_conceptos_IMPUESTOS" FromRole="XMLCFDi_conceptos" ToRole="XMLCFDi_conceptos_impuestos" />
+        </EntityType>
+        <Association Name="FK_xmlcfdi_pxmlcfdi_concepto">
+          <End Type="dbcore_Model.XMLCFDi" Role="XMLCFDi" Multiplicity="1" />
+          <End Type="dbcore_Model.XMLCFDi_conceptos" Role="XMLCFDi_conceptos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="XMLCFDi">
+              <PropertyRef Name="id_xmlcfdi" />
+            </Principal>
+            <Dependent Role="XMLCFDi_conceptos">
+              <PropertyRef Name="id_xmlcfdi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="XMLCFDi_conceptos_impuestos">
+          <Key>
+            <PropertyRef Name="id_concepto_impuesto" />
+          </Key>
+          <Property Name="id_concepto_impuesto" Type="Guid" Nullable="false" />
+          <Property Name="id_concepto" Type="Guid" Nullable="false" />
+          <Property Name="Base" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Impuesto" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="TipoFactor" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TasaOCuota" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Importe" Type="Decimal" Nullable="false" Precision="24" Scale="6" />
+          <Property Name="bit_traslado" Type="Boolean" />
+          <NavigationProperty Name="XMLCFDi_conceptos" Relationship="dbcore_Model.FK_XMLCFDi_conceptos_IMPUESTOS" FromRole="XMLCFDi_conceptos_impuestos" ToRole="XMLCFDi_conceptos" />
+        </EntityType>
+        <Association Name="FK_XMLCFDi_conceptos_IMPUESTOS">
+          <End Type="dbcore_Model.XMLCFDi_conceptos" Role="XMLCFDi_conceptos" Multiplicity="1" />
+          <End Type="dbcore_Model.XMLCFDi_conceptos_impuestos" Role="XMLCFDi_conceptos_impuestos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="XMLCFDi_conceptos">
+              <PropertyRef Name="id_concepto" />
+            </Principal>
+            <Dependent Role="XMLCFDi_conceptos_impuestos">
+              <PropertyRef Name="id_concepto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="cfdi_storage">
+          <Key>
+            <PropertyRef Name="uuid" />
+          </Key>
+          <Property Name="uuid" Type="Guid" Nullable="false" />
+          <Property Name="xmltxt" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="pdf" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <ComplexType Name="sp_cfdiER_Result">
+          <Property Type="Int32" Name="anio" Nullable="true" />
+          <Property Type="Int32" Name="egreso" Nullable="true" />
+          <Property Type="Int32" Name="ingreso" Nullable="true" />
+          <Property Type="Int32" Name="pagos" Nullable="true" />
+          <Property Type="Int32" Name="nomina" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbcore_ModelStoreContainer" CdmEntityContainer="Entities_dbcore">
+          <EntitySetMapping Name="cliente">
+            <EntityTypeMapping TypeName="dbcore_Model.cliente">
+              <MappingFragment StoreEntitySet="cliente">
+                <ScalarProperty Name="fec_vigencia" ColumnName="fec_vigencia" />
+                <ScalarProperty Name="bit_descargasAut" ColumnName="bit_descargasAut" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="baja" ColumnName="baja" />
+                <ScalarProperty Name="fec_alta" ColumnName="fec_alta" />
+                <ScalarProperty Name="pass" ColumnName="pass" />
+                <ScalarProperty Name="pfx" ColumnName="pfx" />
+                <ScalarProperty Name="razonsocial" ColumnName="razonsocial" />
+                <ScalarProperty Name="RFC" ColumnName="RFC" />
+                <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Estatus_CFDi">
+            <EntityTypeMapping TypeName="dbcore_Model.Estatus_CFDi">
+              <MappingFragment StoreEntitySet="Estatus_CFDi">
+                <ScalarProperty Name="fec_consultado" ColumnName="fec_consultado" />
+                <ScalarProperty Name="fec_alta" ColumnName="fec_alta" />
+                <ScalarProperty Name="bit_consultado" ColumnName="bit_consultado" />
+                <ScalarProperty Name="impresion" ColumnName="impresion" />
+                <ScalarProperty Name="uuidtimbre" ColumnName="uuidtimbre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="peticion">
+            <EntityTypeMapping TypeName="dbcore_Model.peticion">
+              <MappingFragment StoreEntitySet="peticion">
+                <ScalarProperty Name="intentos" ColumnName="intentos" />
+                <ScalarProperty Name="bit_descargado" ColumnName="bit_descargado" />
+                <ScalarProperty Name="bit_automatico" ColumnName="bit_automatico" />
+                <ScalarProperty Name="bit_error" ColumnName="bit_error" />
+                <ScalarProperty Name="bit_terminado" ColumnName="bit_terminado" />
+                <ScalarProperty Name="descargaresponse" ColumnName="descargaresponse" />
+                <ScalarProperty Name="numxml" ColumnName="numxml" />
+                <ScalarProperty Name="idpaquete" ColumnName="idpaquete" />
+                <ScalarProperty Name="idsolicitud" ColumnName="idsolicitud" />
+                <ScalarProperty Name="token" ColumnName="token" />
+                <ScalarProperty Name="bit_emitido" ColumnName="bit_emitido" />
+                <ScalarProperty Name="fec_fin" ColumnName="fec_fin" />
+                <ScalarProperty Name="fec_inicio" ColumnName="fec_inicio" />
+                <ScalarProperty Name="fec_create" ColumnName="fec_create" />
+                <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
+                <ScalarProperty Name="id_peticion" ColumnName="id_peticion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="XMLCFDi">
+            <EntityTypeMapping TypeName="dbcore_Model.XMLCFDi">
+              <MappingFragment StoreEntitySet="XMLCFDi">
+                <ScalarProperty Name="ruta" ColumnName="ruta" />
+                <ScalarProperty Name="estatusCancelacion" ColumnName="estatusCancelacion" />
+                <ScalarProperty Name="bit_vigente" ColumnName="bit_vigente" />
+                <ScalarProperty Name="uuidtimbre" ColumnName="uuidtimbre" />
+                <ScalarProperty Name="fechatimbre" ColumnName="fechatimbre" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="totalretenidos" ColumnName="totalretenidos" />
+                <ScalarProperty Name="totaltraslados" ColumnName="totaltraslados" />
+                <ScalarProperty Name="descuento" ColumnName="descuento" />
+                <ScalarProperty Name="subtotal" ColumnName="subtotal" />
+                <ScalarProperty Name="usocfdi" ColumnName="usocfdi" />
+                <ScalarProperty Name="rfcreceptor" ColumnName="rfcreceptor" />
+                <ScalarProperty Name="nombrereceptor" ColumnName="nombrereceptor" />
+                <ScalarProperty Name="rfcemisior" ColumnName="rfcemisior" />
+                <ScalarProperty Name="nombreemisor" ColumnName="nombreemisor" />
+                <ScalarProperty Name="regimenfiscal" ColumnName="regimenfiscal" />
+                <ScalarProperty Name="lugarexpedicion" ColumnName="lugarexpedicion" />
+                <ScalarProperty Name="metodopago" ColumnName="metodopago" />
+                <ScalarProperty Name="tipocomprobante" ColumnName="tipocomprobante" />
+                <ScalarProperty Name="tipocambio" ColumnName="tipocambio" />
+                <ScalarProperty Name="moneda" ColumnName="moneda" />
+                <ScalarProperty Name="formapago" ColumnName="formapago" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="id_peticion" ColumnName="id_peticion" />
+                <ScalarProperty Name="id_xmlcfdi" ColumnName="id_xmlcfdi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sendmail">
+            <EntityTypeMapping TypeName="dbcore_Model.sendmail">
+              <MappingFragment StoreEntitySet="sendmail">
+                <ScalarProperty Name="fec_envio" ColumnName="fec_envio" />
+                <ScalarProperty Name="fec_creacion" ColumnName="fec_creacion" />
+                <ScalarProperty Name="bit_error" ColumnName="bit_error" />
+                <ScalarProperty Name="bit_enviado" ColumnName="bit_enviado" />
+                <ScalarProperty Name="bit_ssl" ColumnName="bit_ssl" />
+                <ScalarProperty Name="puerto" ColumnName="puerto" />
+                <ScalarProperty Name="host" ColumnName="host" />
+                <ScalarProperty Name="cuerpo" ColumnName="cuerpo" />
+                <ScalarProperty Name="cco" ColumnName="cco" />
+                <ScalarProperty Name="cc" ColumnName="cc" />
+                <ScalarProperty Name="asunto" ColumnName="asunto" />
+                <ScalarProperty Name="destino" ColumnName="destino" />
+                <ScalarProperty Name="origen" ColumnName="origen" />
+                <ScalarProperty Name="id_sendmail" ColumnName="id_sendmail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="logs">
+            <EntityTypeMapping TypeName="dbcore_Model.logs">
+              <MappingFragment StoreEntitySet="logs">
+                <ScalarProperty Name="bit_error" ColumnName="bit_error" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="fec_create" ColumnName="fec_create" />
+                <ScalarProperty Name="maquina" ColumnName="maquina" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="id_logs" ColumnName="id_logs" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="parametros">
+            <EntityTypeMapping TypeName="dbcore_Model.parametros">
+              <MappingFragment StoreEntitySet="parametros">
+                <ScalarProperty Name="valor" ColumnName="valor" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id_parametros" ColumnName="id_parametros" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_peticiondescarga" FunctionName="dbcore_Model.Store.sp_peticiondescarga">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="dbcore_Model.sp_peticiondescarga_Result">
+                <ScalarProperty Name="id_peticion" ColumnName="id_peticion" />
+                <ScalarProperty Name="fec_create" ColumnName="fec_create" />
+                <ScalarProperty Name="fec_inicio" ColumnName="fec_inicio" />
+                <ScalarProperty Name="fec_fin" ColumnName="fec_fin" />
+                <ScalarProperty Name="bit_emitido" ColumnName="bit_emitido" />
+                <ScalarProperty Name="numxml" ColumnName="numxml" />
+                <ScalarProperty Name="descargaresponse" ColumnName="descargaresponse" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="XMLCFDi_conceptos">
+            <EntityTypeMapping TypeName="dbcore_Model.XMLCFDi_conceptos">
+              <MappingFragment StoreEntitySet="XMLCFDi_conceptos">
+                <ScalarProperty Name="Parte" ColumnName="Parte" />
+                <ScalarProperty Name="ComplementoConcepto" ColumnName="ComplementoConcepto" />
+                <ScalarProperty Name="CuentaPredial" ColumnName="CuentaPredial" />
+                <ScalarProperty Name="InformacionAduanera" ColumnName="InformacionAduanera" />
+                <ScalarProperty Name="Descuento" ColumnName="Descuento" />
+                <ScalarProperty Name="Importe" ColumnName="Importe" />
+                <ScalarProperty Name="ValorUnitario" ColumnName="ValorUnitario" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Unidad" ColumnName="Unidad" />
+                <ScalarProperty Name="ClaveUnidad" ColumnName="ClaveUnidad" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="NoIdentificacion" ColumnName="NoIdentificacion" />
+                <ScalarProperty Name="ClaveProdServ" ColumnName="ClaveProdServ" />
+                <ScalarProperty Name="id_xmlcfdi" ColumnName="id_xmlcfdi" />
+                <ScalarProperty Name="id_concepto" ColumnName="id_concepto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="XMLCFDi_conceptos_impuestos">
+            <EntityTypeMapping TypeName="dbcore_Model.XMLCFDi_conceptos_impuestos">
+              <MappingFragment StoreEntitySet="XMLCFDi_conceptos_impuestos">
+                <ScalarProperty Name="bit_traslado" ColumnName="bit_traslado" />
+                <ScalarProperty Name="Importe" ColumnName="Importe" />
+                <ScalarProperty Name="TasaOCuota" ColumnName="TasaOCuota" />
+                <ScalarProperty Name="TipoFactor" ColumnName="TipoFactor" />
+                <ScalarProperty Name="Impuesto" ColumnName="Impuesto" />
+                <ScalarProperty Name="Base" ColumnName="Base" />
+                <ScalarProperty Name="id_concepto" ColumnName="id_concepto" />
+                <ScalarProperty Name="id_concepto_impuesto" ColumnName="id_concepto_impuesto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cfdi_storage">
+            <EntityTypeMapping TypeName="dbcore_Model.cfdi_storage">
+              <MappingFragment StoreEntitySet="cfdi_storage">
+                <ScalarProperty Name="pdf" ColumnName="pdf" />
+                <ScalarProperty Name="xmltxt" ColumnName="xmltxt" />
+                <ScalarProperty Name="uuid" ColumnName="uuid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_cfdiER" FunctionName="dbcore_Model.Store.sp_cfdiER">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="dbcore_Model.sp_cfdiER_Result">
+                <ScalarProperty Name="anio" ColumnName="anio" />
+                <ScalarProperty Name="egreso" ColumnName="egreso" />
+                <ScalarProperty Name="ingreso" ColumnName="ingreso" />
+                <ScalarProperty Name="pagos" ColumnName="pagos" />
+                <ScalarProperty Name="nomina" ColumnName="nomina" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

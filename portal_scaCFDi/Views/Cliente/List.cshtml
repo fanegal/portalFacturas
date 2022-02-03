@@ -1,0 +1,105 @@
+﻿@model portal_scaCFDi.Models.clienteViewModels.ListViewModels
+
+@{
+    ViewBag.Title = "Listado de Contribuyentes";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-12">
+        <h2>@ViewBag.Title.</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="@Url.Action("Index", "Home")">Inicio</a>
+            </li>
+            <li>
+                <strong>Contribuyentes</strong>
+            </li>
+        </ol>
+    </div>
+
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+
+                    <p class="text-right">
+                        @Html.ActionLink("Agregar contribuyente", "Create", new { }, new { @class = "btn btn-success" })
+                    </p>
+
+                    <table class="table table-striped table-bordered table-hover dataTables-example">
+                        <thead>
+                            <tr>
+
+                                <th>RFC</th>
+                                <th>Razón social</th>
+                                <th>Vigencia</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in @Model.detalles)
+                            {
+                                <tr>
+                                    <td>@item.rfc</td>
+                                    <td>@item.nombrecliente</td>
+                                    <td>@item.fechaalta</td>
+                                    <td>
+                                        <a data-value="@item.idcliente"
+                                           href="javascript:void(0)" class="btnEdit"><i class="fa fa-edit"></i> Editar</a>
+                                        |
+                                        <a href="@Url.Action("List","Peticion", new { idcliente = item.idcliente})"><i class="fa fa-location-arrow"></i> Peticiones</a>
+                                        |
+                                        <a href="@Url.Action("cfdi_ER","cfdi", new { idcliente = item.idcliente})"><i class="fa fa-folder"></i> CFDI</a>
+                                    </td>
+                                </tr>
+
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Styles {
+    @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
+}
+
+@section Scripts {
+    @Scripts.Render("~/plugins/dataTables")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('.dataTables-example').DataTable({
+                pageLength: 25,
+                dom: '<"html5buttons"B>lTfgitp',
+                language: { url: '../Scripts/plugins/dataTables/es_es.json' },
+                buttons: [
+                //   { extend: 'excel', title: 'ExampleFile' },
+                    { extend: 'pdf', title: 'ExampleFile' },
+
+                //    {
+                //        extend: 'print',
+                //        customize: function (win) {
+                //            $(win.document.body).addClass('white-bg');
+                //            $(win.document.body).css('font-size', '10px');
+
+                //            $(win.document.body).find('table')
+                //                .addClass('compact')
+                //                .css('font-size', 'inherit');
+                //        }
+                //    }
+                ]
+
+            });
+
+
+
+        });</script>
+}

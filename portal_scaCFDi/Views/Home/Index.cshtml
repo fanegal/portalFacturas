@@ -1,0 +1,104 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="widget style1 navy-bg">
+    <h1>ASP.NET</h1>
+    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Contribuyentes</h2>
+        <p>
+            Dentro de este modulo se encuentran los contribuyentes que tiene dados de alta en donde podra ver las peticiónes de descarga así como los CFDI descargados, en entre otras opciones
+        </p>
+        <p>@Html.ActionLink("Ver contribuyentes ", "List", "Cliente", null, new { @class = "btn btn-default" })  </p>
+    </div>
+    <div class="col-md-4">
+        <h2>Programas</h2>
+        <p>
+            Dentro de este modulo se encuentran los programas complementarios de este portal, como la descarga automatica de CFDI y conversor de PFX
+        </p>
+        <p>@Html.ActionLink("Ver programas ", "Centro", "Programas", null, new { @class = "btn btn-default" })  </p>
+    </div>
+    <div class="col-md-4">
+        <h2>Pagos</h2>
+        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Ver Pagos &raquo;</a></p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>¿Tienes dudas?</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <div class="panel-body">
+                    <div class="panel-group" id="accordion">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h5 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">¿Qué es un XML?</a>
+                                </h5>
+                            </div>
+                            <div id="collapseOne" class="panel-collapse collapse in">
+                                <div class="panel-body">
+                                    <p><span style="font-weight: 400;">Es un tipo de archivo con un lenguaje específico para ser leído por la web. Paralelamente al XML, la factura puede acompañarse por un archivo PDF para contener la misma información en texto “común” (legible al usuario).</span></p>
+
+                                    <p><span style="font-weight: 400;">Pero es en el </span><b>archivo XML </b><span style="font-weight: 400;">donde se encuentran todos los elementos del comprobante y él mismo funge como el <span aria-describedby="tt" class="glossaryLink" data-cmtooltip="<div class=glossaryItemTitle>Comprobante fiscal<span class=&quot;dashicons &quot; data-icon=&quot;&quot; style=&quot;display:inline;vertical-align:baseline;&quot;></span></div><div class=glossaryItemBody><h2>Los comprobantes fiscales o CFDI es la forma de comprobación que se basa en el modelo de(...)</h2></div><div class=glossaryTooltipMoreLinkWrapper><a class=glossaryTooltipMoreLink href=https://facturama.mx/blog/que-significa/complemento-instituciones-educativas-iedu-%f0%9f%93%84-%f0%9f%93%b7-%e2%96%b6/ >Detalles del término</a></div>">comprobante fiscal</span>. Este documento digital es el que debe resguardarse por el periodo indicado por las autoridades hacendarias para fines de auditorías y clarificaciones.&nbsp;&nbsp;</span></p>
+                                   
+                                    <p><span style="font-weight: 400;">Se caracteriza por una cadena y sello único, además de guardar la hora en que se realizó. Una vez generado el archivo, no puede modificarse debido a esa cadena y sellado.</span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Tipos de CFDI en el SAT México</a>
+                                </h4>
+                            </div>
+                            <div id="collapseTwo" class="panel-collapse collapse">
+                                <div class="panel-body">
+
+                                    <p><span style="font-weight: 400;">Existen diferentes clases de comprobantes fiscales:</span></p>
+                                    <ol>
+                                        <li style="font-weight: 400;"><span style="font-weight: 400;">CFDI tipo “I” o CFDI tipo Ingreso. Por ejemplo, las Facturas, Recibos de Honorarios o Recibos de Arrendamiento.</span></li>
+                                        <li style="font-weight: 400;"><span style="font-weight: 400;">CFDI tipo “E” o CFDI de <span aria-describedby="tt" class="glossaryLink" data-cmtooltip="<div class=glossaryItemTitle>Egreso<span class=&quot;dashicons &quot; data-icon=&quot;&quot; style=&quot;display:inline;vertical-align:baseline;&quot;></span></div><div class=glossaryItemBody>El comprobante de Egreso un tipo de CFDI que aplica cuando se realizan devoluciones o(...)</div><div class=glossaryTooltipMoreLinkWrapper><a class=glossaryTooltipMoreLink href=https://facturama.mx/blog/que-significa/egreso/ >Detalles del término</a></div>">Egreso</span>. Un caso son las Notas de Crédito.</span></li>
+                                        <li style="font-weight: 400;">
+                                            <span style="font-weight: 400;">
+                                                CFDI tipo “T” o CFDI tipo Traslado. Como la <span aria-describedby="tt" class="glossaryLink" data-cmtooltip="<div class=glossaryItemTitle>Carta Porte<span class=&quot;dashicons &quot; data-icon=&quot;&quot; style=&quot;display:inline;vertical-align:baseline;&quot;></span></div><div class=glossaryItemBody><img width='1200' height='740' src='https://facturama.mx/blog/wp-content/uploads/2020/03/carta-porte-sat.png' class='cmtt-tooltip-featured-image wp-post-image' alt='carta porte transportes' style='width: 100px; margin-top: 2%;' srcset='https://facturama.mx/blog/wp-content/uploads/2020/03/carta-porte-sat.png 1200w, https://facturama.mx/blog/wp-content/uploads/2020/03/carta-porte-sat-300x185.png 300w, https://facturama.mx/blog/wp-content/uploads/2020/03/carta-porte-sat-1024x631.png 1024w, https://facturama.mx/blog/wp-content/uploads/2020/03/carta-porte-sat-768x474.png 768w' sizes='(max-width: 1200px) 100vw, 1200px' />
+<figure class=&quot;wp-block-image size-large&quot;></figure>
+<br /><p><span style=&quot;font-weight: 400;&quot;>La </span><b>Carta Porte</b><span style=&quot;font-weight: 400;&quot;> es un comprobante de tipo Traslado “T” con validez internacional mediante el(...)</span></p><iframe width='100%' height='300' src='https://www.youtube.com/embed/2E5CB6gSjoo' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe></div><div class=glossaryTooltipMoreLinkWrapper><a class=glossaryTooltipMoreLink href=https://facturama.mx/blog/que-significa/ejemplo-carta-porte/ >Detalles del término</a></div>">Carta Porte</span>.
+                                            </span>
+                                        </li>
+                                        <li style="font-weight: 400;"><span style="font-weight: 400;">CFDI tipo “N” o CFDI tipo Nómina. Aquí entran los Recibos de Nóminas de sueldos y salarios o Asimilados a salarios.</span></li>
+                                        <li style="font-weight: 400;"><span style="font-weight: 400;">CFDI tipo “P” o CFDI tipo Pago. Complementos de pago o Factura de recepción de pago.</span></li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="jumbotron">
+            <h1>CFDI</h1>
+            <p>El CFDI es el comprobante fiscal de un pago realizado que describe el costo del producto vendido o servicio prestado y el 
+                cual desglosa los impuestos aplicados. Se trata de un archivo en formato XML que cumple los estándares definidos por el SAT.<p>
+                <a role="button" class="btn btn-primary btn-lg">Learn more</a>
+            </p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,118 @@
+﻿@model portal_scaCFDi.Models.PeticionViewModels.CreateViewModels
+
+@{
+    ViewBag.Title = "Nueva Peticion";
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-md-9 offset-md-9">
+            <div class="ibox ">
+                <div class="ibox-content">
+                    @using (Html.BeginForm("Create", "Peticion", FormMethod.Post, new
+                    { method = "post" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => model.idcliente)
+                        <div class="form-horizontal">
+                            <p class="text-right">
+                                @Html.ActionLink("Regresar al listado", "List", new { idCliente = Model.idcliente }, new { @class = "btn btn-success" })
+                            </p>
+                            <hr />
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @if (Model.error)
+                            {
+                                <div class="bg-danger p-xs b-r-xl">
+                                    <p>@Model.mensaje</p>
+                                </div>
+                                <br />
+                            }
+                            <div class="form-group" id="data_1">
+                                @Html.LabelFor(model => model.inicio, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-5 input-group date">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    @Html.EditorFor(model => model.inicio, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.inicio, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group" id="data_2">
+                                @Html.LabelFor(model => model.fin, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-5 input-group date">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    @Html.EditorFor(model => model.fin, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.fin, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.emitido, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.CheckBoxFor(m => m.emitido, new { @class = "form-check-input" })
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <div class="col-md-5">
+                                    @Html.ValidationMessageFor(model => model.emitido, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <p class="text-right">
+                                <input type="submit" value="Crear" class="btn btn-success" />
+                            </p>
+
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Styles {
+    @Styles.Render("~/plugins/awesomeCheckboxStyles")
+    @Styles.Render("~/plugins/dateRangeStyles")
+    @Styles.Render("~/Content/plugins/iCheck/iCheckStyles")
+    @Styles.Render("~/plugins/jasnyBootstrapStyles")
+    @Styles.Render("~/plugins/nouiSliderStyles")
+    @Styles.Render("~/plugins/dataPickerStyles")
+}
+
+@section Scripts {
+    @Scripts.Render("~/plugins/iCheck")
+    @Scripts.Render("~/plugins/dataPicker")
+    @Scripts.Render("~/plugins/jasnyBootstrap")
+    @Scripts.Render("~/plugins/clockpicker")
+    @Scripts.Render("~/plugins/dateRange")
+
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#data_1 .input-group.date').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                autoclose: true,
+                format: 'yyyy-mm-dd',
+                language: 'es'
+            });
+            $('#data_2 .input-group.date').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                autoclose: true,
+                format: 'yyyy-mm-dd',
+                language: 'es'
+            });
+        });
+
+
+    </script>
+}
